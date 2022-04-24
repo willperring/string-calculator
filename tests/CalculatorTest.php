@@ -112,8 +112,9 @@ class CalculatorTest extends TestCase
     public function providerAddsNumbersWithCustomDelimiter(): array
     {
         return [
-            'Single custom delimiter'    => [ '//;\n1;2',   3 ],
-            'Multiple custom delimiters' => [ '//;\n1;2;3', 6 ]
+            'Single custom delimiter'     => [ '//;\n1;2',   3 ],
+            'Multiple custom delimiters'  => [ '//;\n1;2;3', 6 ],
+            'Different custom delimiters' => [ '//!\n2!3!4', 9 ]
         ];
     }
 
@@ -123,6 +124,9 @@ class CalculatorTest extends TestCase
      * These could easily get misinterpreted given different separator characters,
      * so we need to ensure that this test covers all forms of default separator,
      * as well as custom ones.
+     *
+     * This test gets marked as 'risky' if 'beStrictAboutTestsThatDoNotTestAnything'
+     * is not set to false, as it does not assert anything specifically.
      *
      * Verifies behaviour requirement 4.
      *
@@ -136,7 +140,11 @@ class CalculatorTest extends TestCase
     {
         $this->expectNotToPerformAssertions();
         $this->expectException( NegativeValueException::class );
+
+        // We want the exception message to be informative...
         $this->expectExceptionMessage( 'Negatives not allowed' );
+
+        // ... as well as including each of the negative values.
         foreach( $reported as $expectedValue ) {
             $this->expectExceptionMessage( (string) $expectedValue );
         }
@@ -144,6 +152,7 @@ class CalculatorTest extends TestCase
         $calculator = new Calculator();
         $result     = $calculator->add( $characters );
 
+        // We should not get here; an exception should be thrown.
         $this->assertEquals( 'Should not be tested', $result );
     }
 
@@ -153,7 +162,7 @@ class CalculatorTest extends TestCase
             'Single negative, default delimiter'      => [ '1,-3,4',       [-3]    ],
             'Multiple negatives, multiple delimiters' => [ '1,-5|3,-2',    [-5,-2] ],
             'Single negative, custom delimiter'       => [ '//;\n1;-4;3',  [-4]    ],
-            'Multiple negatives, custom delimiter'    => [ '//:\n-1:3:-2', [-1,-2] ],
+            'Multiple negatives, custom delimiter'    => [ '//!\n-1!3!-2', [-1,-2] ],
         ];
     }
 }
