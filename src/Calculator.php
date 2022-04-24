@@ -13,6 +13,19 @@ class Calculator
      */
     public function add( string $characters ): int
     {
-        return 0;
+        $result = 0;
+        $parts  = explode( ',', $characters );
+
+        // In reality, this is way too simple to do the job effectively,
+        // however, given that part of the brief was to 'write the simplest thing
+        // that works', and each behaviour definition is being treated almost as a
+        // separate release, we'll use this for now to pass the basic tests and move on.
+        foreach( $parts as $part ) {
+            if( $value = (int) $part ) {
+                $result += $value;
+            }
+        }
+
+        return $result;
     }
 }
