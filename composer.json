@@ -1,0 +1,21 @@
+{
+    "name": "willperring/string-calculator",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Will Perring",
+            "email": "will@goblincity.co.uk"
+        }
+    ],
+    "require": {
+        "php": ">=8.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload" : {
+        "psr-4": {
+            "StringCalculator\\" : "src"
+        }
+    }
+}
