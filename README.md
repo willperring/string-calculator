@@ -1,5 +1,10 @@
 # String Calculator
 
+This repository has been organised in such a way that, starting with version 0.1.0
+as the barebones repository, each requirement in the task brief has been treated
+as a new minor version. By viewing the codebase as it exists at each tag, the 
+progression in structure can be visible. Commits have been performed atomically.
+
 ## Requirements
 
 This library required a PHP version of 8.0 upwards.
