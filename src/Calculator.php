@@ -10,6 +10,10 @@ class Calculator
     /**
      * Add up a string of numbers
      *
+     * Technically, this is not the method signature asked for in the test
+     * brief, although in order to keep with coding standards it's been renamed
+     * from 'Add' to 'add' here.
+     *
      * @param string $characters
      *
      * @throws NegativeValueException
