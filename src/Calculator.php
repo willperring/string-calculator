@@ -14,7 +14,7 @@ class Calculator
     public function add( string $characters ): int
     {
         $result = 0;
-        $parts  = explode( ',', $characters );
+        $parts  = preg_split( '/[|,]/', $characters );
 
         // In reality, this is way too simple to do the job effectively,
         // however, given that part of the brief was to 'write the simplest thing
