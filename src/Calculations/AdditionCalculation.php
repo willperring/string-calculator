@@ -27,7 +27,7 @@ class AdditionCalculation
      */
     protected string $_splitRegex = '/[|,]/';
 
-    protected string $_characters;
+    protected string $_numbers;
 
     /**
      * AdditionCalculation constructor
@@ -37,15 +37,15 @@ class AdditionCalculation
      * with a leading definition at the start of the string
      * to define a custom separator.
      *
-     * @param string $characters
+     * @param string $numbers
      */
-    public function __construct( string $characters )
+    public function __construct( string $numbers )
     {
-        if( preg_match( static::$_separatorDefinition, $characters, $definition) ) {
+        if( preg_match( static::$_separatorDefinition, $numbers, $definition) ) {
             $this->_splitRegex = "/{$definition['separator']}/";
-            $this->_characters = $definition['values'];
+            $this->_numbers    = $definition['values'];
         } else {
-            $this->_characters = $characters;
+            $this->_numbers = $numbers;
         }
     }
 
@@ -58,7 +58,7 @@ class AdditionCalculation
     public function getResult(): int
     {
         $result = 0;
-        $parts  = preg_split( $this->_splitRegex, $this->_characters );
+        $parts  = preg_split( $this->_splitRegex, $this->_numbers );
 
         $negatives = [];
 
