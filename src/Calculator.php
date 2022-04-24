@@ -11,7 +11,7 @@ class Calculator
      *
      * @param string $characters
      *
-     * @return void
+     * @return int
      */
     public function add( string $characters ): int
     {
