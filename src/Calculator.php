@@ -3,6 +3,7 @@
 namespace StringCalculator;
 
 use StringCalculator\Calculations\AdditionCalculation;
+use StringCalculator\Exceptions\NegativeValueException;
 
 class Calculator
 {
@@ -11,6 +12,7 @@ class Calculator
      *
      * @param string $characters
      *
+     * @throws NegativeValueException
      * @return int
      */
     public function add( string $characters ): int

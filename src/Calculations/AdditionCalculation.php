@@ -2,13 +2,32 @@
 
 namespace StringCalculator\Calculations;
 
+use StringCalculator\Exceptions\NegativeValueException;
+
 class AdditionCalculation
 {
-
+    /**
+     * Regex for detecting custom separators
+     *
+     * Given part of the string we're testing for includes slashes, it makes
+     * sense to use custom delimiters here. Hashes are a safe option, as we
+     * don't need them elsewhere in the pattern. The use of named captures
+     * just helps to make things a bit more readable.
+     *
+     * @var string
+     */
     protected static string $_separatorDefinition = '#^//(?<separator>.*)\\\n(?<values>.*)$#';
 
-    protected string $_characters;
+    /**
+     * Default separator options
+     *
+     * Out of the box, commas and pipes are supported.
+     *
+     * @var string
+     */
     protected string $_splitRegex = '/[|,]/';
+
+    protected string $_characters;
 
     /**
      * AdditionCalculation constructor
@@ -33,17 +52,30 @@ class AdditionCalculation
     /**
      * Add up the numbers in the string
      *
+     * @throws NegativeValueException
      * @return int
      */
-    public function getResult()
+    public function getResult(): int
     {
         $result = 0;
         $parts  = preg_split( $this->_splitRegex, $this->_characters );
 
-        foreach( $parts as $part ) {
-            if( $value = (int) $part ) {
+        $negatives = [];
+
+        foreach( $parts as $part )
+        {
+            if( $value = (int) $part )
+            {
+                if( $value < 0 )
+                    $negatives[] = $value;
+
                 $result += $value;
             }
+        }
+
+        if( count($negatives) ) {
+            $notAllowed = implode( ', ', $negatives );
+            throw new NegativeValueException( 'Negatives not allowed: ' . $notAllowed );
         }
 
         return $result;
