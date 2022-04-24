@@ -29,5 +29,21 @@ or run PHPUnit straight from the vendor directory with:
 vendor/bin/phpunit
 ```
 
+## Running manually
+
+To run the calculator manually, you can use the command:
+
+```shell
+bin/add <string>
+```
+
+This will likely need to be quoted, particularly is using spaces or custom
+separators.
+
+```shell
+bin/add "//;\n1;2;3"
+```
+
+
 
 

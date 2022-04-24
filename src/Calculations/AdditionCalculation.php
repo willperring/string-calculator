@@ -4,7 +4,11 @@ namespace StringCalculator\Calculations;
 
 class AdditionCalculation
 {
+
+    protected static string $_separatorDefinition = '#^//(?<separator>.*)\\\n(?<values>.*)$#';
+
     protected string $_characters;
+    protected string $_splitRegex = '/[|,]/';
 
     /**
      * AdditionCalculation constructor
@@ -18,7 +22,12 @@ class AdditionCalculation
      */
     public function __construct( string $characters )
     {
-        $this->_characters = $characters;
+        if( preg_match( static::$_separatorDefinition, $characters, $definition) ) {
+            $this->_splitRegex = "/{$definition['separator']}/";
+            $this->_characters = $definition['values'];
+        } else {
+            $this->_characters = $characters;
+        }
     }
 
     /**
@@ -29,12 +38,8 @@ class AdditionCalculation
     public function getResult()
     {
         $result = 0;
-        $parts  = preg_split( '/[|,]/', $this->_characters );
+        $parts  = preg_split( $this->_splitRegex, $this->_characters );
 
-        // In reality, this is way too simple to do the job effectively,
-        // however, given that part of the brief was to 'write the simplest thing
-        // that works', and each behaviour definition is being treated almost as a
-        // separate release, we'll use this for now to pass the basic tests and move on.
         foreach( $parts as $part ) {
             if( $value = (int) $part ) {
                 $result += $value;

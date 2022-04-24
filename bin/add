@@ -1,0 +1,23 @@
+#!/usr/bin/env php
+<?php
+use StringCalculator\Calculator;
+
+// We need composer autoloader for the PSR-4 namespace autoloading.
+require_once( dirname(__DIR__) . '/vendor/autoload.php' );
+
+if( ! $additionString = @$argv[1] ) {
+    echo "No addition string provided\n";
+    exit(1);
+}
+
+echo "Using string: {$additionString}\n";
+
+try {
+    $calculator = new Calculator();
+    $result     = $calculator->add( $additionString );
+    echo "Result: {$result}\n";
+} catch( Exception $e ) {
+    echo "Exception caught:\n{$e->getMessage()}\n";
+}
+
+

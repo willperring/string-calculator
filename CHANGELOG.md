@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.0] - 2022-04-24
+### Added
+- Abstracted calculation into a new class
+- Custom separator now possible
+- New bin script to perform calculations from the command line
+
 ## [0.3.0] - 2022-04-24
 ### Changed
 - Modified calculator to split strings on either commas or pipe characters.
