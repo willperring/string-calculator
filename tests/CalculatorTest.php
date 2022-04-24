@@ -43,7 +43,8 @@ class CalculatorTest extends TestCase
     public function providerAddsNumbers(): array
     {
         return [
-            'Empty string'    => [ 'a',   1 ],
+            'Null string'     => [ '',    0 ],
+            'Whitespace'      => [ ' ',   0 ],
             'Single value'    => [ '1',   1 ],
             'Multiple values' => [ '1,2', 3 ]
         ];
